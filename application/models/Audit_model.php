@@ -46,8 +46,8 @@ class Audit_model extends CI_Model {
           return $query->result_array();
       }
 
-      $query = $this->db->get_where('supervisor.id', array('name' => $name));
-      return $query->row_array();
+      $query = $this->db->select('id')->where('name', $name)->get('supervisor');
+      return $query->row('id');
 
     }
 
@@ -55,12 +55,12 @@ class Audit_model extends CI_Model {
     {
         if ($name === FALSE)
         {
-            $query = $this->db->get('business');
+            $query = $this->db->get('small_business_entity');
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('business.id', array('name' => $name));
-        return $query->row_array();
+        $query = $this->db->select('id')->where('name', $name)->get('small_business_entity');
+        return $query->row('id');
 
     }
 }

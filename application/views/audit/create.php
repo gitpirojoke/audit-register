@@ -9,16 +9,17 @@
 
         <div class="form-group">
             <label for="business_sel">Выбрать СМП</label>
+<!--            <input class="form-control" id="business_sel" name="business_name">-->
             <select class="form-control" id="business_sel" name="business_name">
-                <option>a</option>
-                <option>b</option>
-                <option>c</option>
+                <?php foreach ($business as $business_item): ?>
+                    <option> <?php echo $business_item['name']; ?></option>
+                <?php endforeach; ?>
             </select>
             <label for="supervisor_sel">Выбрать проверяющий орган</label>
             <select class="form-control" id="supervisor_sel" name="supervisor_name">
-                <option>ь</option>
-                <option>о</option>
-                <option>ш</option>
+            <?php foreach ($supervisors as $supervisor_item): ?>
+                <option> <?php echo $supervisor_item['name']; ?></option>
+            <?php endforeach; ?>
             </select>
         </div>
 
@@ -39,7 +40,7 @@
 
     <div class="row">
         <div class="col">
-            <label for="end_date">Дата Завершения</label><br/>
+            <label for="end_date">Дата завершения</label><br/>
             <input type="date"
                    name="end_date"
                    id="end_date"
@@ -60,6 +61,7 @@
         </div>
     </div>
 </div>
+<?php //echo $business_test; ?>
 </div>
 
 </form>

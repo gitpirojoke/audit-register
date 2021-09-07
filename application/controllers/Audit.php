@@ -30,6 +30,9 @@ class Audit extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE)
         {
+            $data['supervisors'] = $this->audit_model->getSupervisor();
+            $data['business'] = $this->audit_model->getBusiness();
+//            $data['business_test'] = $this->audit_model->getBusiness('ИП Шкура');
             $this->load->view('templates/header', $data);
             $this->load->view('audit/create');
             $this->load->view('templates/footer');
@@ -37,7 +40,7 @@ class Audit extends CI_Controller {
         }
         else
         {
-            $this->customer_model->setAudit();
+            $this->audit_model->setAudit();
             redirect('audit/', 'refresh');
         }
     }
