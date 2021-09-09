@@ -4,12 +4,17 @@ class Audit_model extends CI_Model {
 
     public function __construct()
     {
+		parent::__construct();
         $this->load->database();
     }
 
-    public function getAudit($id = FALSE)
+	/**
+	 * @param int|null $id
+	 * @return array|array[]|null
+	 */
+    public function getAudit(int $id = null):array
     {
-      if ($id === FALSE)
+      if ($id === null)
       {
           $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
           $this->db->from('audit');
@@ -25,7 +30,11 @@ class Audit_model extends CI_Model {
       }
     }
 
-    public function setAudit()
+	/**
+	 * Проверяет и вносит данный для новой проверки
+	 * @return bool
+	 */
+    public function setAudit():bool
     {
       $this->load->helper('url');
 
@@ -38,9 +47,14 @@ class Audit_model extends CI_Model {
         return $this->db->insert('audit', $data);
     }
 
-    public function getSupervisor($name = FALSE)
+	/**
+	 * Возвращает массив проверяющих либо id если задано имя
+	 * @param string|null $name
+	 * @return array|array[]|mixed|object|null
+	 */
+    public function getSupervisor(string $name = null)
     {
-      if ($name === FALSE)
+      if ($name === null)
       {
           $query = $this->db->get('supervisor');
           return $query->result_array();
@@ -51,9 +65,14 @@ class Audit_model extends CI_Model {
 
     }
 
-    public function getBusiness($name = FALSE)
+	/**
+	 * Возвращает массив СМП либо id если задано имя
+	 * @param null $name
+	 * @return array|array[]|mixed|object|null
+	 */
+    public function getBusiness($name = null)
     {
-        if ($name === FALSE)
+        if ($name === null)
         {
             $query = $this->db->get('small_business_entity');
             return $query->result_array();

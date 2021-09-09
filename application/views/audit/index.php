@@ -41,8 +41,6 @@
                 <td><?php echo $audit_item['start_date']; ?></td>
                 <td><?php echo $audit_item['end_date']; ?></td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="<?php echo base_url('audit/view/' . $audit_item['id']); ?>"><i
-                                class="fa fa-eye fa-fw"></i></a>
                     <a class="btn btn-primary"
                        href="<?php echo base_url('audit/edit/' . $audit_item['id']); ?>"><i
                                 class="fa fa-pencil-square-o fa-fw"></i></a>

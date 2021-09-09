@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @property Audit_model $audit_model
+ */
+
 class Audit extends CI_Controller {
 
     public function __construct()
@@ -9,6 +13,9 @@ class Audit extends CI_Controller {
         $this->load->helper('url');
     }
 
+	/**
+	 *
+	 */
     public function index()
     {
         $data['title'] = 'Реестр плановых проверок';
@@ -18,6 +25,9 @@ class Audit extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+	/**
+	 *
+	 */
     public function create()
     {
         $this->load->helper('form');
@@ -32,7 +42,6 @@ class Audit extends CI_Controller {
         {
             $data['supervisors'] = $this->audit_model->getSupervisor();
             $data['business'] = $this->audit_model->getBusiness();
-//            $data['business_test'] = $this->audit_model->getBusiness('ИП Шкура');
             $this->load->view('templates/header', $data);
             $this->load->view('audit/create');
             $this->load->view('templates/footer');
