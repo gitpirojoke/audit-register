@@ -25,9 +25,9 @@ class Audit extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-	/**
-	 *
-	 */
+    /**
+     *
+     */
     public function create()
     {
         $this->load->helper('form');
@@ -54,7 +54,10 @@ class Audit extends CI_Controller {
         }
     }
 
-    public function edit($id = null)
+    /**
+     * @param int|null $id
+     */
+    public function edit(int $id = null)
 	{
 		$data['audit_item'] = $this->audit_model->getAudit($id);
 
@@ -85,5 +88,14 @@ class Audit extends CI_Controller {
 		}
 
 	}
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        $this->audit_model->deleteAudit($id);
+        redirect('audit/', 'refresh');
+    }
 
 }

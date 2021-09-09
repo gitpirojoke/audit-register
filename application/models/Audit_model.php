@@ -14,10 +14,10 @@ class Audit_model extends CI_Model {
 	 */
     public function getAudit(int $id = null):array
     {
-      if ($id === null)
+        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+        $this->db->from('audit');
+        if ($id === null)
       {
-          $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
-          $this->db->from('audit');
           $this->db->join('small_business_entity','business_id = small_business_entity.id');
           $this->db->join('supervisor', 'supervisor_id = supervisor.id');
           $query = $this->db->get();
@@ -25,9 +25,7 @@ class Audit_model extends CI_Model {
       }
       else
       {
-		  $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
-		  $this->db->from('audit');
-		  $this->db->where('audit.id',$id);
+          $this->db->where('audit.id',$id);
 		  $this->db->join('small_business_entity','business_id = small_business_entity.id');
 		  $this->db->join('supervisor', 'supervisor_id = supervisor.id');
 		  $query = $this->db->get();
@@ -67,6 +65,16 @@ class Audit_model extends CI_Model {
 		return $this->db->update('audit', $data,array('id' => $id));
 	}
 
+    /**
+     * @param int $id
+     * @return false|mixed|string
+     */
+    public  function deleteAudit(int $id):bool
+    {
+        $this->load->helper('url');
+        return $this->db->delete('audit', array('id' => $id));
+    }
+
 	/**
 	 * Возвращает массив проверяющих либо id если задано имя
 	 * @param string|null $name
@@ -85,12 +93,12 @@ class Audit_model extends CI_Model {
 
     }
 
-	/**
-	 * Возвращает массив СМП либо id если задано имя
-	 * @param null $name
-	 * @return array|array[]|mixed|object|null
-	 */
-    public function getBusiness($name = null)
+    /**
+     * Возвращает массив СМП либо id если задано имя
+     * @param string|null $name
+     * @return array|array[]|mixed|object|null
+     */
+    public function getBusiness(string $name = null)
     {
         if ($name === null)
         {
