@@ -25,27 +25,47 @@ class Audit_model extends CI_Model {
       }
       else
       {
-          $query = $this->db->get_where('audit', array('id' => $id));
+		  $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+		  $this->db->from('audit');
+		  $this->db->where('audit.id',$id);
+		  $this->db->join('small_business_entity','business_id = small_business_entity.id');
+		  $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+		  $query = $this->db->get();
           return $query->row_array();
       }
     }
 
 	/**
-	 * Проверяет и вносит данный для новой проверки
+	 * Проверяет и вносит данные для новой проверки
 	 * @return bool
 	 */
     public function setAudit():bool
     {
-      $this->load->helper('url');
-
-      $data = array(
+    	$this->load->helper('url');
+    	$data = array(
           'business_id' => $this->getBusiness($this->input->post('business_name')),
           'supervisor_id' => $this->getSupervisor($this->input->post('supervisor_name')) ,
           'start_date' => $this->input->post('start_date'),
           'end_date' => $this->input->post('end_date')
-      );
+		);
         return $this->db->insert('audit', $data);
     }
+
+	/**
+	 * @param int $id
+	 * @return bool
+	 */
+    public function updateAudit(int $id):bool
+	{
+		$this->load->helper('url');
+		$data = array(
+			'business_id' => $this->getBusiness($this->input->post('business_name')),
+			'supervisor_id' => $this->getSupervisor($this->input->post('supervisor_name')) ,
+			'start_date' => $this->input->post('start_date'),
+			'end_date' => $this->input->post('end_date')
+		);
+		return $this->db->update('audit', $data,array('id' => $id));
+	}
 
 	/**
 	 * Возвращает массив проверяющих либо id если задано имя
