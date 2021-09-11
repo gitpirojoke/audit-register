@@ -110,4 +110,19 @@ class Audit_model extends CI_Model {
         return $query->row('id');
 
     }
+
+    public function insertAuditBach(array $data)
+    {
+        $this->load->helper('url');
+        foreach ($data as &$data_item)
+        {
+            $data_item['business_id'] = $this->getBusiness($data_item['business_name']);
+            $data_item['supervisor_id'] = $this->getSupervisor($data_item['supervisor_name']);
+            unset($data_item['supervisor_name']);
+            unset($data_item['business_name']);
+
+        }
+        return $this->db->insert_batch('audit',$data);
+
+    }
 }

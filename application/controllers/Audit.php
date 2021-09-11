@@ -1,9 +1,16 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+require FCPATH.'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Reader\Xls as XlsReader;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * @property Audit_model $audit_model
  */
-
 class Audit extends CI_Controller {
 
     public function __construct()
@@ -20,6 +27,7 @@ class Audit extends CI_Controller {
     {
         $data['title'] = 'Реестр плановых проверок';
         $data['audit'] = $this->audit_model->getAudit();
+        $this->load->helper('form');
         $this->load->view('templates/header', $data);
         $this->load->view('audit/index', $data);
         $this->load->view('templates/footer');
@@ -98,4 +106,40 @@ class Audit extends CI_Controller {
         redirect('audit/', 'refresh');
     }
 
+    public function importExcel()
+    {
+        $upload_file = $_FILES['upload_file']['name'];
+        $extension = pathinfo($upload_file,PATHINFO_EXTENSION);
+
+        if($extension == 'xls')
+        {
+            $reader = new XlsReader();
+        }
+        else if ($extension == 'xlsx')
+        {
+            $reader= new XlsxReader();
+        }
+        else
+        {
+            show_404();
+        }
+        $spreadSheet = $reader->load($_FILES['upload_file']['tmp_name']);
+        $sheetData = $spreadSheet->getActiveSheet()->toArray();
+        $sheetCount = count($sheetData);
+        if($sheetCount>1)
+        {
+            $data=array();
+            for ($i=0; $i < $sheetCount; $i++) {
+                $data[]=array(
+                    'business_name'=>$sheetData[$i][0],
+                    'supervisor_name'=>$sheetData[$i][1],
+                    'start_date'=>$sheetData[$i][2],
+                    'end_date'=>$sheetData[$i][3],
+                );
+            }
+            $this->audit_model->insertAuditBach($data);
+            redirect('audit/', 'refresh');
+        }
+
+    }
 }

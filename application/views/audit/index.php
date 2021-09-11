@@ -10,6 +10,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
 
 <div class="container"><h1><?php echo $title ?></h1></div>
+<div>
+<!--    --><?php //echo form_open('audit/importExcel'); ?>
+    <form method="post" action="<?php echo base_url('audit/importExcel');?>" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" name="upload_file" class="form-control" placeholder="Enter Name" id="upload_file" required>
+    </div>
+    <div class="form-group">
+        <input type="submit" name="submit" class="btn btn-primary">
+    </div>
+    </form>
+</div>
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
