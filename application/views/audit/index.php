@@ -2,29 +2,41 @@
 /**
  * @var string $title
  * @var array $audit
+ * @var array $links
  */
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.bootstrap_4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/filter.formatter.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
 
+
 <div class="container"><h1><?php echo $title ?></h1></div>
-<div>
-<!--    --><?php //echo form_open('audit/importExcel'); ?>
-    <form method="post" action="<?php echo base_url('audit/importExcel');?>" enctype="multipart/form-data">
-    <div class="form-group">
-        <input type="file" name="upload_file" class="form-control" placeholder="Enter Name" id="upload_file" required>
-    </div>
-    <div class="form-group">
-        <input type="submit" name="submit" class="btn btn-primary">
-    </div>
-    </form>
-</div>
+<!--<div>-->
+<!---->
+<!--</div>-->
 <div class="row">
+
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <p><a class="btn btn-success" href="<?php echo base_url('audit/create') ?>"> Новый аудит</a></p>
+            <div class="container">
+                <p>
+                    <form method="post" action="<?php echo base_url('audit/importExcel'); ?>"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" name="upload_file" class="form-control" placeholder="Enter Name"
+                                   id="upload_file" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-primary" value="Импорт из excel">
+                            <a class="btn btn-success" href="<?php echo base_url('audit/exportExcel') ?>">Экспорт в
+                                excel</a>
+                        </div>
+                    </form>
+                    <a class="btn btn-success" href="<?php echo base_url('audit/create') ?>"> Новый аудит</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -33,21 +45,21 @@
     <table id="filter-table" class="table table-bordered">
         <thead>
         <tr>
-            <th width="30px">№</th>
-            <th class="col-sm-3">Проверяемый СМП</th>
-            <th class="col-sm-3">Контролирующий орган</th>
-            <th class="col-sm-3">Дата начала</th>
-            <th class="col-sm-3">Дата завершения</th>
-            <th class="sorter-false filter-false col-sm-3"></th>
+            <th width="30px">Код</th>
+            <th class="col-md-3">Проверяемый СМП</th>
+            <th class="col-md-3">Контролирующий орган</th>
+            <th class="col-md-3">Дата начала</th>
+            <th class="col-md-3">Дата завершения</th>
+            <th class="sorter-false filter-false col-md-3"></th>
         </tr>
         </thead>
-        <tr class="col-filter">
-            <th></th>
-            <th><input type="text"/></th>
-            <th><input type="text"/></th>
-            <th><input type="date" class = "input-lg"/></th>
-            <th><input type="date"/></th>
-        </tr>
+<!--        <tr class="col-filter">-->
+<!--            <th></th>-->
+<!--            <th><input type="text"/></th>-->
+<!--            <th><input type="text"/></th>-->
+<!--            <th><input type="date" class = "input-lg"/></th>-->
+<!--            <th><input type="date"/></th>-->
+<!--        </tr>-->
         <tbody>
 
         <?php foreach ($audit as $audit_item): ?>
@@ -69,45 +81,19 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+
 </div>
 
 
-<!--<div class="pagination ">
+<div class="pagination ">
     <div class="mx-auto">
-        <?php /*echo $links; */?>
+        <?php echo $links; ?>
     </div>
-</div>-->
+</div>
 
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
         $("#filter-table").tablesorter({ theme: "bootstrap", widgets: ['filter']});
     });
 </script>
-
-<script>
-    $('.col-filter input').on('input', function () {
-        filterTable($(this).parents('table'));
-    });
-
-    function filterTable($table) {
-        var $filters = $table.find('.col-filter th');
-        var $rows = $table.find('.table-data');
-        $rows.each(function (rowIndex) {
-            var valid = true;
-            $(this).find('td').each(function (colIndex) {
-                if ($filters.eq(colIndex).find('input').val()) {
-                    if ($(this).html().toLowerCase().indexOf(
-                        $filters.eq(colIndex).find('input').val().toLowerCase()) === -1) {
-                        valid = valid && false;
-                    }
-                }
-            });
-            if (valid === true) {
-                $(this).css('display', '');
-            } else {
-                $(this).css('display', 'none');
-            }
-        });
-    }
-</script>-->

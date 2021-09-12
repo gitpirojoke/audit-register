@@ -50,6 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['audit'] = 'audit';
+$route['audit/index'] = 'audit';
+$route['audit/page'] = 'audit/index';
+$route['audit/page/(:num)'] = 'audit/index/$1';
 $route['audit/create'] = 'audit/create';
 $route['audit/edit'] = 'audit/edit';
 $route['default_controller'] = 'audit';

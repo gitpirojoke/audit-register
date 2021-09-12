@@ -18,6 +18,7 @@ class Audit extends CI_Controller {
         parent::__construct();
         $this->load->model('audit_model');
         $this->load->helper('url');
+        $this->load->library('pagination');
     }
 
 	/**
@@ -26,7 +27,19 @@ class Audit extends CI_Controller {
     public function index()
     {
         $data['title'] = 'Реестр плановых проверок';
-        $data['audit'] = $this->audit_model->getAudit();
+//        $data['audit'] = $this->audit_model->getAudit();
+//        $this->config->load('pagination', TRUE);
+//        $pageConfig = $this->config->item('pagination');
+
+        $pageConfig['total_rows'] = $this->audit_model->countAudits();
+        $pageConfig['base_url'] = base_url('audit/page');
+        $pageConfig['per_page'] = 5;
+        $pageConfig['use_page_numbers'] = TRUE;
+        $pageConfig['first_url'] = base_url('audit/page/1');
+        $offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1) * $pageConfig['per_page']:0;
+        $data['audit'] = $this->audit_model->getAuditsPage($pageConfig['per_page'],$offset);
+        $this->pagination->initialize($pageConfig);
+        $data['links'] = $this->pagination->create_links();
         $this->load->helper('form');
         $this->load->view('templates/header', $data);
         $this->load->view('audit/index', $data);
@@ -129,12 +142,12 @@ class Audit extends CI_Controller {
         if($sheetCount>1)
         {
             $data=array();
-            for ($i=0; $i < $sheetCount; $i++) {
+            for ($i=1; $i < $sheetCount; $i++) {
                 $data[]=array(
-                    'business_name'=>$sheetData[$i][0],
-                    'supervisor_name'=>$sheetData[$i][1],
-                    'start_date'=>$sheetData[$i][2],
-                    'end_date'=>$sheetData[$i][3],
+                    'business_name'=>$sheetData[$i][1],
+                    'supervisor_name'=>$sheetData[$i][2],
+                    'start_date'=>$sheetData[$i][3],
+                    'end_date'=>$sheetData[$i][4],
                 );
             }
             $this->audit_model->insertAuditBach($data);
@@ -142,4 +155,31 @@ class Audit extends CI_Controller {
         }
 
     }
+
+    public function exportExcel()
+    {
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode('SBS_register').'"');
+        $data = $this->audit_model->getAudit();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Реестр проверок');
+        $sheet->setCellValue('A1','ID');
+        $sheet->setCellValue('B1', 'Проверяемй СМП');
+        $sheet->setCellValue('C1', 'Проверяющий орган');
+        $sheet->setCellValue('D1','Дата начала');
+        $sheet->setCellValue('E1','Дата завершения');
+        $currentRow = 2;
+        foreach ($data as $audit_item) {
+            $sheet->setCellValue('A' . $currentRow, $audit_item['id']);
+            $sheet->setCellValue('B' . $currentRow, $audit_item['business_name']);
+            $sheet->setCellValue('C' . $currentRow, $audit_item['supervisor_name']);
+            $sheet->setCellValue('D' . $currentRow, $audit_item['start_date']);
+            $sheet->setCellValue('E' . $currentRow, $audit_item['end_date']);
+            $currentRow++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+    }
+
 }

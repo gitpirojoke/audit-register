@@ -125,4 +125,31 @@ class Audit_model extends CI_Model {
         return $this->db->insert_batch('audit',$data);
 
     }
+
+    /**
+     * Возвращает выборку по заданому ограничению
+     * @param $limit
+     * @param $start
+     * @return array|array[]
+     */
+    public function getAuditsPage($limit,$start):array
+    {
+        $this->db->limit($limit,$start);
+        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+        $this->db->from('audit');
+        $this->db->join('small_business_entity','business_id = small_business_entity.id');
+        $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
+
+    /**
+     * Возвращает количество записей в таблице аудит
+     * @return int
+     */
+    public function countAudits():int
+    {
+        return $this->db->count_all('audit');
+    }
 }
