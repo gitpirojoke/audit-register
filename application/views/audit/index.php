@@ -22,19 +22,9 @@
         <div class="pull-right">
             <div class="container">
                 <p>
-                    <form method="post" action="<?php echo base_url('audit/importExcel'); ?>"
-                          enctype="multipart/form-data">
-                        <div class="form-group">
-                            <input type="file" name="upload_file" class="form-control" placeholder="Enter Name"
-                                   id="upload_file" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Импорт из excel">
-                            <a class="btn btn-success" href="<?php echo base_url('audit/exportExcel') ?>">Экспорт в
-                                excel</a>
-                        </div>
-                    </form>
-                    <a class="btn btn-success" href="<?php echo base_url('audit/create') ?>"> Новый аудит</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importExcelModal">Импорт из excel</button>
+                <a class="btn btn-success" href="<?php echo base_url('audit/exportExcel') ?>">Экспорт в excel</a>
+                <a class="btn btn-success" href="<?php echo base_url('audit/create') ?>"> Новый аудит</a>
                 </p>
             </div>
         </div>
@@ -42,7 +32,7 @@
 </div>
 
 <div class="container">
-    <table id="filter-table" class="table table-bordered">
+    <table id="filter-table" class="table table-bordered table-sm">
         <thead>
         <tr>
             <th width="30px">Код</th>
@@ -92,17 +82,14 @@
 </div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-	Launch demo modal
-</button>
+
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="importExcelModal" tabindex="-1" role="dialog" aria-labelledby="importExcelModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Импорт из Excel</h5>
+				<h5 class="modal-title" id="importExcelModalLabel">Импорт из Excel</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

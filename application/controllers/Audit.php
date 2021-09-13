@@ -22,15 +22,13 @@ class Audit extends CI_Controller {
     }
 
 	/**
-	 *
+	 * Выводит все записи audit
+     * На текущий момент вывод с пастраничным разбиением от CI3
 	 */
     public function index()
     {
         $data['title'] = 'Реестр плановых проверок';
 //        $data['audit'] = $this->audit_model->getAudit();
-//        $this->config->load('pagination', TRUE);
-//        $pageConfig = $this->config->item('pagination');
-
         $pageConfig['total_rows'] = $this->audit_model->countAudits();
         $pageConfig['base_url'] = base_url('audit/page');
         $pageConfig['per_page'] = 5;
@@ -47,7 +45,7 @@ class Audit extends CI_Controller {
     }
 
     /**
-     *
+     * Создает запись о новом аудите
      */
     public function create()
     {
@@ -76,6 +74,7 @@ class Audit extends CI_Controller {
     }
 
     /**
+     * Редактирует существующую запись
      * @param int|null $id
      */
     public function edit(int $id = null)
@@ -111,6 +110,7 @@ class Audit extends CI_Controller {
 	}
 
     /**
+     * Удалает запись
      * @param int $id
      */
     public function delete(int $id)
@@ -119,6 +119,9 @@ class Audit extends CI_Controller {
         redirect('audit/', 'refresh');
     }
 
+    /**
+     * Импортирует данные об аудитах из excel файла
+     */
     public function importExcel()
     {
         $upload_file = $_FILES['upload_file']['name'];
@@ -144,10 +147,10 @@ class Audit extends CI_Controller {
             $data=array();
             for ($i=1; $i < $sheetCount; $i++) {
                 $data[]=array(
-                    'business_name'=>$sheetData[$i][1],
-                    'supervisor_name'=>$sheetData[$i][2],
-                    'start_date'=>$sheetData[$i][3],
-                    'end_date'=>$sheetData[$i][4],
+                    'business_name'=>$sheetData[$i][0],
+                    'supervisor_name'=>$sheetData[$i][1],
+                    'start_date'=>$sheetData[$i][2],
+                    'end_date'=>$sheetData[$i][3],
                 );
             }
             $this->audit_model->insertAuditBach($data);
@@ -156,6 +159,10 @@ class Audit extends CI_Controller {
 
     }
 
+    /**
+     * Экспортирует все записи в excel
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
     public function exportExcel()
     {
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -177,6 +184,10 @@ class Audit extends CI_Controller {
             $sheet->setCellValue('D' . $currentRow, $audit_item['start_date']);
             $sheet->setCellValue('E' . $currentRow, $audit_item['end_date']);
             $currentRow++;
+        }
+        //Адаптировать ширину столбцов
+        foreach ($sheet->getColumnIterator() as $column) {
+            $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
         }
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');

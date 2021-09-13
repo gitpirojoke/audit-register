@@ -1,12 +1,12 @@
 <html>
 	<head>
 		<title>Audit Register</title>
-<!--        <link rel="stylesheet" type="text/css" href="--><?php //echo base_url('vendor/assets/css/bootstrap.css');?><!--">-->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('vendor/assets/myCss.css');?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!--        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
 <!--        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -20,22 +20,6 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Navigation -->
 <div >
-<!--  <header class="topbar">-->
-<!--      <div class="container">-->
-<!--        <div class="row">-->
-<!--          <div class="col-sm-12">-->
-<!--            <ul class="social-network">-->
-<!--              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-facebook"></i></a></li>-->
-<!--              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-twitter"></i></a></li>-->
-<!--              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-linkedin"></i></a></li>-->
-<!--              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-pinterest"></i></a></li>-->
-<!--              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-google-plus"></i></a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!---->
-<!--        </div>-->
-<!--      </div>-->
-<!--  </header>-->
   <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
     <div class="container">
       <a class="navbar-brand" href="<?php echo base_url();?>" style="text-transform: uppercase;">Аудит</a>
