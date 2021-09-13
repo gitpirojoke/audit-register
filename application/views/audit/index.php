@@ -92,6 +92,42 @@
 </div>
 
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Импорт из Excel</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-body">
+					<h5>Выбрерите файл</h5>
+					<form id="dataImport" method="post" action="<?php echo base_url('audit/importExcel'); ?>"
+						  enctype="multipart/form-data">
+						<div class="form-group">
+							<input type="file" name="upload_file" class="form-control" placeholder="Enter Name"
+								   id="upload_file" required>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" form="dataImport" class="btn btn-primary">Импорт</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#filter-table").tablesorter({ theme: "bootstrap", widgets: ['filter']});
