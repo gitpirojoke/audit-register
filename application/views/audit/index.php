@@ -31,16 +31,16 @@
     </div>
 </div>
 
-<div class="container">
-    <table id="filter-table" class="table table-bordered table-sm">
+<div class="container table-responsive ">
+    <table id="filter-table" class="table table-bordered ">
         <thead>
-        <tr>
-            <th width="30px">Код</th>
-            <th class="col-md-3">Проверяемый СМП</th>
-            <th class="col-md-3">Контролирующий орган</th>
-            <th class="col-md-3">Дата начала</th>
-            <th class="col-md-3">Дата завершения</th>
-            <th class="sorter-false filter-false col-md-3"></th>
+        <tr class="align-middle">
+            <th class="col-sm-1">Код</th>
+            <th class="col-sm-2">Проверяемый СМП</th>
+            <th class="col-sm-2">Аудитор</th>
+            <th class="col-sm-2">Дата начала</th>
+            <th class="col-sm-2">Дата завершения</th>
+            <th class="sorter-false filter-false col-sm-1"></th>
         </tr>
         </thead>
 <!--        <tr class="col-filter">-->
