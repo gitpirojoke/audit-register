@@ -34,32 +34,6 @@
                 </select>
             </div>
 
-
-
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <label for="start_date">Дата начала</label><br/>-->
-<!--                    <input type="text"-->
-<!--                           name="start_date"-->
-<!--                           id="start_date"-->
-<!--                           class="form-group datepicker"-->
-<!--                           value="--><?php //echo set_value('start_date'); ?><!--"-->
-<!--                    />-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <label for="end_date2">Дата завершения</label><br/>-->
-<!--                    <input type="text"-->
-<!--                           name="end_date2"-->
-<!--                           id="end_date2"-->
-<!--                           class="form-group datepicker"-->
-<!--                           value="--><?php //echo set_value('end_date'); ?><!--"-->
-<!--                    />-->
-<!--                </div>-->
-<!--            </div>-->
-
 			<div class="list-group" >
 				<label for="start_date">Дата начала</label>
 				<div class="input-group date">

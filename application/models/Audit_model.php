@@ -152,4 +152,18 @@ class Audit_model extends CI_Model {
     {
         return $this->db->count_all('audit');
     }
+
+    /**
+     * Возвращает массив имен подходящих под search_data
+     * @param string $search_data
+     * @return array|array[]|object|object[]
+     */
+    public function getLiveBusinessNames(string  $search_data):array
+    {
+        $this->db->select('name');
+        $this->db->from('small_business_entity');
+        $this->db->like('name',$search_data);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
