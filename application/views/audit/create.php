@@ -1,9 +1,16 @@
 <?php echo validation_errors(); ?>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
 
+<?php
+/**
+ * @var string $title
+ * @var array $business
+ * @var array $supervisors
+ */
+?>
 <div class="container col-md-8 mx-auto">
 	<?php echo form_open('audit/create'); ?>
     <div class="card mx-auto" style="width: 20rem;">
@@ -69,7 +76,7 @@
 				</div>
 			</div>
 
-			<div class="list-group align-left" >
+			<div class="list-group" >
 				<label for="end_date">Дата завершения</label>
 				<div class="input-group date">
 					<input id = "end_date"
@@ -100,7 +107,9 @@
 
 <script type="text/javascript">
 	$('.datepicker').datepicker({
-		format: 'dd.mm.yyyy',
+
+		format: 'yyyy.mm.dd',
 		language: 'ru',
+		autoclose: 'true',
 	});
 </script>

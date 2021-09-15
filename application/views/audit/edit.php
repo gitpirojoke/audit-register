@@ -1,5 +1,13 @@
 <?php echo validation_errors(); ?>
 
+<?php
+/**
+ * @var string $title
+ * @var array $business
+ * @var array $supervisors
+ * @var array $audit_item
+ */
+?>
 <?php echo form_open('audit/edit/'. $audit_item['id']); ?>
 <div class="container col-md-8">
 
@@ -62,11 +70,6 @@
             />
         </div>
     </div>
-</div>
-<?php echo $audit_item['supervisor_name']; ?>
-<?php //foreach ($audit_item as $aitem): ?>
-<!--	<option> --><?php //echo $aitem['supervisor_name']; ?><!--</option>-->
-<?php //endforeach; ?>
 </div>
 
 </form>
