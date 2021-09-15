@@ -85,8 +85,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="importExcelModal" tabindex="-1" role="dialog" aria-labelledby="importExcelModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="importExcelModal" tabindex="-1"  aria-labelledby="importExcelModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="importExcelModalLabel">Импорт из Excel</h5>
@@ -95,16 +95,14 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="modal-body">
 					<h5>Выбрерите файл</h5>
 					<form id="dataImport" method="post" action="<?php echo base_url('audit/importExcel'); ?>"
 						  enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="file" name="upload_file" class="form-control" placeholder="Enter Name"
+							<input type="file" name="upload_file" class="form-control-file" placeholder="Enter Name"
 								   id="upload_file" required>
 						</div>
 					</form>
-				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" form="dataImport" class="btn btn-primary">Импорт</button>

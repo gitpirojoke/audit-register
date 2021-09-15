@@ -166,7 +166,7 @@ class Audit extends CI_Controller {
     public function exportExcel()
     {
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="'. urlencode('SBS_register').'"');
+        header('Content-Disposition: attachment; filename="'. urlencode('SBS_register.xlsx').'"');
         $data = $this->audit_model->getAudit();
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
