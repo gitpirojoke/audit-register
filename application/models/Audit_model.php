@@ -154,7 +154,7 @@ class Audit_model extends CI_Model {
     }
 
     /**
-     * Возвращает массив имен подходящих под search_data
+     * Возвращает массив имен смп подходящих под search_data
      * @param string $search_data
      * @return array|array[]|object|object[]
      */

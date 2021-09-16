@@ -193,4 +193,22 @@ class Audit extends CI_Controller {
         $writer->save('php://output');
     }
 
+    public function liveSearch()
+	{
+
+		$search_data = $_POST['search_data'];
+
+		$query = $this->audit_model->getLiveBusinessNames($search_data);
+
+		foreach ($query as $row):
+			echo "<li><a href='#'>" . $row->name . "</a></li>";
+
+		endforeach;
+	}
+
+	public function test_search(){
+		$this->load->view('templates/header');
+		$this->load->view('audit/test_search');
+		$this->load->view('templates/footer');
+	}
 }
