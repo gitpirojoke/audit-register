@@ -23,13 +23,13 @@
 
             <div class="list-group ">
                 <label for="business_sel">Выброр СМП</label>
-                <select class="custom-select js-example-basic-single" id="business_sel" name="business_name">
+                <select class="sel2" id="business_sel" name="business_name">
                     <?php foreach ($business as $business_item): ?>
                         <option> <?php echo $business_item['name']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <label for="supervisor_sel">Выброр аудитора</label>
-                <select class="custom-select js-example-basic-single" id="supervisor_sel" name="supervisor_name">
+                <select class="sel2" id="supervisor_sel" name="supervisor_name">
                     <?php foreach ($supervisors as $supervisor_item): ?>
                         <option> <?php echo $supervisor_item['name']; ?></option>
                     <?php endforeach; ?>
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 
-            <div class="card-body ">
+            <div class="card-body text-center">
 				<input type="submit" name="submit" class="btn btn-success" value="Добавить" style="width:100px;"/>
 				<a class="btn btn-secondary" style="width:100px;" href="<?php echo base_url() ?>">Отмена</a>
             </div>
@@ -84,13 +84,13 @@
 <script type="text/javascript">
 	$('.datepicker').datepicker({
 
-		format: 'yyyy.mm.dd',
+		format: 'yyyy-mm-dd',
 		language: 'ru',
 		autoclose: 'true',
 	});
 
-	$(document).ready(function() {
-		$('.js-example-basic-single').select2(
+	$(function() {
+		$('.sel2').select2(
 			{
 				theme: 'bootstrap4',
 			}

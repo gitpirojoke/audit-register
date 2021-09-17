@@ -115,6 +115,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#filter-table").tablesorter({ theme: "bootstrap", widgets: ['filter']});
+        $("#filter-table").tablesorter({
+            theme: "bootstrap",
+            widgets: ['filter']});
     });
 </script>
