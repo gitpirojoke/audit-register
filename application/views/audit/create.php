@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <?php
 /**
@@ -14,7 +15,7 @@
 ?>
 <div class="container col-md-8 mx-auto">
 	<?php echo form_open('audit/create'); ?>
-    <div class="card mx-auto" style="width: 20rem;">
+    <div class="card mx-auto my-sm-3" style="width: 20rem;">
         <div class="card-header text-white flex-fill bg-primary">
             <h5 class="card-title "><?php echo $title ?></h5>
         </div>
@@ -89,7 +90,11 @@
 	});
 
 	$(document).ready(function() {
-		$('.js-example-basic-single').select2();
+		$('.js-example-basic-single').select2(
+			{
+				theme: 'bootstrap4',
+			}
+		);
 	});
 </script>
 
