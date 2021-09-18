@@ -82,19 +82,19 @@
 
 
 <script type="text/javascript">
-	$('.datepicker').datepicker({
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
 
-		format: 'yyyy-mm-dd',
-		language: 'ru',
-		autoclose: 'true',
-	});
+            format: 'yyyy-mm-dd',
+            language: 'ru',
+            autoclose: 'true',
+        });
 
-	$(function() {
-		$('.sel2').select2(
-			{
-				theme: 'bootstrap4',
-			}
-		);
-	});
+        $('.sel2').select2(
+            {
+                theme: 'bootstrap4',
+            }
+        );
+    });
 </script>
 

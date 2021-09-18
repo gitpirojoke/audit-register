@@ -139,6 +139,7 @@ class Audit_model extends CI_Model {
         $this->db->from('audit');
         $this->db->join('small_business_entity','business_id = small_business_entity.id');
         $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+        $this->db->order_by('id');
         $query = $this->db->get();
         return $query->result_array();
 

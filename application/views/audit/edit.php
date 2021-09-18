@@ -60,7 +60,7 @@
                     />
                     <div class="input-group-addon input-group-append">
                         <div class="input-group-text">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <i class="fa fa-calendar"></i>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     />
                     <div class="input-group-addon input-group-append">
                         <div class="input-group-text">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <i class="fa fa-calendar"></i>
                         </div>
                     </div>
                 </div>
@@ -96,18 +96,19 @@
 
 
 <script type="text/javascript">
-    $('.datepicker').datepicker({
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
 
-        format: 'yyyy-mm-dd',
-        language: 'ru',
-        autoclose: 'true',
-    });
+            format: 'yyyy-mm-dd',
+            language: 'ru',
+            autoclose: 'true',
+        });
 
-    $(function() {
         $('.sel2').select2(
             {
                 theme: 'bootstrap4',
             }
         );
     });
+
 </script>
