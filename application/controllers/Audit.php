@@ -19,6 +19,7 @@ class Audit extends CI_Controller {
         $this->load->model('audit_model');
         $this->load->helper('url');
         $this->load->library('pagination');
+        $this->load->library('session');
     }
 
 	/**
@@ -49,9 +50,29 @@ class Audit extends CI_Controller {
      */
     public function filter()
     {
+        $searchData = [];
+        if($this->input->post('submit') != NULL ){
+            $searchData['business_name'] = $this->input->post('business_name');
+            $searchData['supervisor_name'] = $this->input->post('supervisor_name');
+            $searchData['start_date'] = $this->input->post('start_date');
+            $searchData['end_date'] = $this->input->post('end_date');
+            $this->session->set_userdata('searchData',$searchData);
+
+        }else{
+            if($this->session->userdata('searchData') != NULL){
+                $searchData = $this->session->userdata('searchData');
+            }
+        }
         $data['title'] = 'фильтруем';
-        $data['audit'] = $this->audit_model->filter();
-        $data['links'] = '';
+        $pageConfig['total_rows'] = $this->audit_model->countFilteredAudits($searchData);
+        $pageConfig['base_url'] = base_url('audit/filter/page');
+        $pageConfig['per_page'] = 3;
+        $pageConfig['use_page_numbers'] = TRUE;
+        $pageConfig['first_url'] = base_url('audit/filter/page/1');
+        $offset = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) * $pageConfig['per_page']:0;
+        $data['audit'] = $this->audit_model->getFilteredPages($pageConfig['per_page'],$offset,$searchData);
+        $this->pagination->initialize($pageConfig);
+        $data['links'] = $this->pagination->create_links();
         $this->load->helper('form');
         $this->load->view('templates/header', $data);
         $this->load->view('audit/index', $data);

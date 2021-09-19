@@ -24,7 +24,7 @@
 <div >
   <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url();?>" style="text-transform: uppercase;">Аудит</a>
+      <a class="navbar-brand" href="<?php echo base_url('audit/page/1');?>">Аудит+</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,12 +32,8 @@
 
         <ul class="navbar-nav ml-auto">
 
-          <li id="main_nav" class="nav-item">
-            <a class="nav-link" href="<?php echo base_url();?>">Главная</a>
-          </li>
-
           <li id="registry_nav" class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('audit/');?>">Реестр</a>
+            <a class="nav-link" href="<?php echo base_url('audit/page/1');?>">Реестр</a>
           </li>
 
           <li id="info_nav" class="nav-item">

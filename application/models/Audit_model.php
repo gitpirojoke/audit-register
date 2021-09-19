@@ -6,6 +6,7 @@ class Audit_model extends CI_Model {
     {
 		parent::__construct();
         $this->load->database();
+        $this->load->helper('url');
     }
 
 	/**
@@ -52,20 +53,21 @@ class Audit_model extends CI_Model {
 
     }
 
-    public  function filter():array
+    /**
+     * Возвращает фильтрованны данные постранично
+     * @param int $limit
+     * @param int $start
+     * @param array $searchData
+     * @return array
+     */
+    public  function getFilteredPages(int $limit, int $start, array $searchData):array
     {
+        $this->db->limit($limit,$start);
         $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
         $this->db->from('audit');
         $this->db->join('small_business_entity','business_id = small_business_entity.id');
         $this->db->join('supervisor', 'supervisor_id = supervisor.id');
-        if(!empty($this->input->post('business_name')))
-            $this->db->like('small_business_entity.name', $this->input->post('business_name'));
-        if(!empty($this->input->post('supervisor_name')))
-            $this->db->like('supervisor.name', $this->input->post('supervisor_name'));
-        if(!empty($this->input->post('start_date')))
-            $this->db->where('start_date >', $this->input->post('start_date'));
-        if(!empty($this->input->post('end_date')))
-            $this->db->where('end_date <', $this->input->post('end_date'));
+        $this->addFilters($searchData);
         $query = $this->db->get();
         return $query->result_array();
 
@@ -77,7 +79,6 @@ class Audit_model extends CI_Model {
 	 */
     public function setAudit():bool
     {
-    	$this->load->helper('url');
     	$data = array(
           'business_id' => $this->getBusiness($this->input->post('business_name')),
           'supervisor_id' => $this->getSupervisor($this->input->post('supervisor_name')) ,
@@ -93,7 +94,6 @@ class Audit_model extends CI_Model {
 	 */
     public function updateAudit(int $id):bool
 	{
-		$this->load->helper('url');
 		$data = array(
 			'business_id' => $this->getBusiness($this->input->post('business_name')),
 			'supervisor_id' => $this->getSupervisor($this->input->post('supervisor_name')) ,
@@ -109,7 +109,6 @@ class Audit_model extends CI_Model {
      */
     public  function deleteAudit(int $id):bool
     {
-        $this->load->helper('url');
         return $this->db->delete('audit', array('id' => $id));
     }
 
@@ -149,9 +148,13 @@ class Audit_model extends CI_Model {
 
     }
 
+    /**
+     * Добавляет группу записей
+     * @param array $data
+     * @return false|int
+     */
     public function insertAuditBach(array $data)
     {
-        $this->load->helper('url');
         foreach ($data as &$data_item)
         {
             $data_item['business_id'] = $this->getBusiness($data_item['business_name']);
@@ -175,6 +178,22 @@ class Audit_model extends CI_Model {
     }
 
     /**
+     * Возвращает количество записей в фильтре
+     * @param $searchData
+     * @return int
+     */
+    public function countFilteredAudits($searchData):int
+    {
+        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+        $this->db->from('audit');
+        $this->db->join('small_business_entity','business_id = small_business_entity.id');
+        $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+        $this->addFilters($searchData);
+        return $this->db->count_all_results();
+
+    }
+
+    /**
      * Возвращает массив имен смп подходящих под search_data
      * @param string $search_data
      * @return array|array[]|object|object[]
@@ -186,5 +205,20 @@ class Audit_model extends CI_Model {
         $this->db->like('name',$search_data);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    /**
+     * @param array $searchData
+     */
+    public function addFilters(array $searchData): void
+    {
+        if (!empty($searchData['business_name']))
+            $this->db->like('small_business_entity.name', $searchData['business_name']);
+        if (!empty($searchData['supervisor_name']))
+            $this->db->like('supervisor.name', $searchData['supervisor_name']);
+        if (!empty($searchData['start_date']))
+            $this->db->where('start_date >', $searchData['start_date']);
+        if (!empty($searchData['end_date']))
+            $this->db->where('end_date <', $searchData['end_date']);
     }
 }
