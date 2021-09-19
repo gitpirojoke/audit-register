@@ -6,11 +6,22 @@
  */
 ?>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.bootstrap_4.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/filter.formatter.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.bootstrap_4.min.css">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/filter.formatter.min.css">-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>-->
 
+<link href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap4.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <div class="container"><h1><?php echo $title ?></h1></div>
 <!--<div>-->
@@ -30,6 +41,74 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <?php echo form_open('audit/filter'); ?>
+    <div class="row">
+
+        <div class="col-sm-1 ">
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group">
+                <input id = "business_name"
+                       type="text"
+                       class="form-control"
+                       name="business_name"
+                       placeholder="СМП"
+                       value="<?php echo set_value('business_name'); ?>"
+                />
+            </div>
+
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group">
+                <input id = "supervisor_name"
+                       type="text"
+                       class="form-control"
+                       name="supervisor_name"
+                       placeholder="аудитор"
+                       value="<?php echo set_value('supervisor_name'); ?>"
+                />
+            </div>
+
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group date">
+                <input id = "start_date"
+                       type="text"
+                       class="form-control datepicker"
+                       name="start_date"
+                       value="<?php echo set_value('start_date'); ?>"
+                />
+                <div class="input-group-addon input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group date">
+                <input id = "end_date"
+                       type="text"
+                       class="form-control datepicker"
+                       name="end_date"
+                       value="<?php echo set_value('end_date'); ?>"
+                />
+                <div class="input-group-addon input-group-append">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-success"><i class="fa fa-search"> </i> Поиск</button>
+        </div>
+    </div>
+    </form>
+</div>
+
 
 <div class="container table-responsive ">
     <table id="filter-table" class="table table-bordered ">
@@ -115,8 +194,22 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#filter-table").tablesorter({
-            theme: "bootstrap",
-            widgets: ['filter']});
+        // $("#filter-table").tablesorter({
+        //     theme: "bootstrap",
+        //     widgets: ['filter']});
+        $('.datepicker').datepicker({
+
+            format: 'yyyy-mm-dd',
+            language: 'ru',
+            autoclose: 'true',
+        });
+
+        $('.sel2').select2(
+            {
+                theme: 'bootstrap4',
+            }
+        );
+
+        // $('#filter-table').DataTable();
     });
 </script>

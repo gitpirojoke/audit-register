@@ -33,6 +33,44 @@ class Audit_model extends CI_Model {
       }
     }
 
+    /**
+     * Возвращает выборку по заданому ограничению
+     * @param int $limit
+     * @param int $start
+     * @return array|array[]
+     */
+    public function getAuditsPage(int $limit,int $start):array
+    {
+        $this->db->limit($limit,$start);
+        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+        $this->db->from('audit');
+        $this->db->join('small_business_entity','business_id = small_business_entity.id');
+        $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+        $this->db->order_by('id');
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
+
+    public  function filter():array
+    {
+        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
+        $this->db->from('audit');
+        $this->db->join('small_business_entity','business_id = small_business_entity.id');
+        $this->db->join('supervisor', 'supervisor_id = supervisor.id');
+        if(!empty($this->input->post('business_name')))
+            $this->db->like('small_business_entity.name', $this->input->post('business_name'));
+        if(!empty($this->input->post('supervisor_name')))
+            $this->db->like('supervisor.name', $this->input->post('supervisor_name'));
+        if(!empty($this->input->post('start_date')))
+            $this->db->where('start_date >', $this->input->post('start_date'));
+        if(!empty($this->input->post('end_date')))
+            $this->db->where('end_date <', $this->input->post('end_date'));
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
+
 	/**
 	 * Проверяет и вносит данные для новой проверки
 	 * @return bool
@@ -126,24 +164,6 @@ class Audit_model extends CI_Model {
 
     }
 
-    /**
-     * Возвращает выборку по заданому ограничению
-     * @param $limit
-     * @param $start
-     * @return array|array[]
-     */
-    public function getAuditsPage($limit,$start):array
-    {
-        $this->db->limit($limit,$start);
-        $this->db->select('audit.*, small_business_entity.name as business_name, supervisor.name as supervisor_name');
-        $this->db->from('audit');
-        $this->db->join('small_business_entity','business_id = small_business_entity.id');
-        $this->db->join('supervisor', 'supervisor_id = supervisor.id');
-        $this->db->order_by('id');
-        $query = $this->db->get();
-        return $query->result_array();
-
-    }
 
     /**
      * Возвращает количество записей в таблице аудит

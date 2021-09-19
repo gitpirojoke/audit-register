@@ -51,6 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['audit'] = 'audit';
 $route['audit/index'] = 'audit';
+$route['audit/filter'] = 'audit/filter';
+$route['audit/filter/page/(:num)'] = 'audit/filter/$1';
 $route['audit/test_search'] = 'audit/test_search';
 $route['audit/page'] = 'audit/index';
 $route['audit/page/(:num)'] = 'audit/index/$1';

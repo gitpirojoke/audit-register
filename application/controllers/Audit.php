@@ -45,6 +45,21 @@ class Audit extends CI_Controller {
     }
 
     /**
+     * Выводит отфильтрованную таблицу
+     */
+    public function filter()
+    {
+        $data['title'] = 'фильтруем';
+        $data['audit'] = $this->audit_model->filter();
+        $data['links'] = '';
+        $this->load->helper('form');
+        $this->load->view('templates/header', $data);
+        $this->load->view('audit/index', $data);
+        $this->load->view('templates/footer');
+
+    }
+
+    /**
      * Создает запись о новом аудите
      */
     public function create()
