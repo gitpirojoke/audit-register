@@ -63,7 +63,7 @@ class Audit extends CI_Controller {
                 $searchData = $this->session->userdata('searchData');
             }
         }
-        $data['title'] = 'фильтруем';
+        $data['title'] = 'Списк по фильтрам';
         $pageConfig['total_rows'] = $this->audit_model->countFilteredAudits($searchData);
         $pageConfig['base_url'] = base_url('audit/filter/page');
         $pageConfig['per_page'] = 3;
@@ -229,6 +229,10 @@ class Audit extends CI_Controller {
         $writer->save('php://output');
     }
 
+    /**
+     * В текущей ревизии не используется
+     * Метод для ajax релевантного поиска имен СМП на стороне сервера
+     */
     public function liveSearch()
 	{
 
@@ -242,6 +246,10 @@ class Audit extends CI_Controller {
 		endforeach;
 	}
 
+    /**
+     * В текущей ревизии не используется
+     * тестовый вид для ajax релевантного поиска имен смп
+     */
 	public function test_search(){
 		$this->load->view('templates/header');
 		$this->load->view('audit/test_search');

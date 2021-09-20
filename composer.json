@@ -12,7 +12,8 @@
 	},
 	"require": {
 		"php": ">=7.2",
-		"phpoffice/phpspreadsheet": "1.17.1"
+		"phpoffice/phpspreadsheet": "1.17.1",
+		"fzaninotto/faker": ""
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

@@ -190,7 +190,6 @@ class Audit_model extends CI_Model {
         $this->db->join('supervisor', 'supervisor_id = supervisor.id');
         $this->addFilters($searchData);
         return $this->db->count_all_results();
-
     }
 
     /**

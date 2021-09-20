@@ -11,24 +11,9 @@
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>-->
 
-<link href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap4.min.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <div class="container text-center"><h1><?php echo $title ?></h1></div>
-<!--<div>-->
-<!---->
-<!--</div>-->
-
-
 
 <div class="container ">
     <?php echo form_open('audit/filter', 'id="filterForm"'); ?>
@@ -102,7 +87,7 @@
             </div>
             <div class="row py-2">
                 <div class="col">
-                    <a class="btn btn-success" href="<?php echo base_url('audit/page/1');?>">Показать все</a>
+                    <a class="btn btn-success" href="<?php echo base_url('audit/page/1');?>">Сброс фильтров</a>
                     <button type="submit" class="btn btn-success" form="filterForm" name="submit" value="submit"><i class="fa fa-search" > </i> Поиск</button>
                     <!--            <input type="submit" class="btn btn-success" value="search" name="submit" >-->
                 </div>
@@ -152,7 +137,7 @@
                         <a class="btn btn-primary"
                            href="<?php echo base_url('audit/edit/' . $audit_item['id']); ?>"><i
                                     class="fa fa-pencil-square-o fa-fw"></i></a>
-                        <a class="btn btn-danger"
+                        <a class="btn btn-danger" onclick="return confirm('Вы действительно хотите удалить эту запись?');"
                            href="<?php echo base_url('audit/delete/' . $audit_item['id']); ?>"><i
                                     class="fa fa-trash-o fa-fw"></i></a>
                     </td>
@@ -204,25 +189,9 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // $("#filter-table").tablesorter({
-        //     theme: "bootstrap",
-        //     widgets: ['filter']});
-        $('.datepicker').datepicker(
-            {
-
-                format: 'yyyy-mm-dd',
-                language: 'ru',
-                autoclose: 'true',
-            }
-        );
-
-        $('.sel2').select2(
-            {
-                theme: 'bootstrap4',
-            }
-        );
-
-        // $('#filter-table').DataTable();
-    });
+    // $(document).ready(function() {
+    //     $("#filter-table").tablesorter({
+    //         theme: "bootstrap",
+    //         widgets: ['filter']});
+    // });
 </script>

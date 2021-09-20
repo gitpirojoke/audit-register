@@ -1,11 +1,5 @@
 <?php echo validation_errors(); ?>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <?php
 /**
  * @var string $title
@@ -76,25 +70,3 @@
     </div>
 	</form>
 </div>
-
-
-
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.datepicker').datepicker({
-
-            format: 'yyyy-mm-dd',
-            language: 'ru',
-            autoclose: 'true',
-        });
-
-        $('.sel2').select2(
-            {
-                theme: 'bootstrap4',
-            }
-        );
-    });
-</script>
-
