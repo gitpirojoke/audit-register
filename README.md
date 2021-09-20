@@ -7,7 +7,7 @@
 
 Развертывание:
 
-создать бд - https://github.com/gitpirojoke/audit-register.git;
+создать бд - create database auditregister character set utf8 collate utf8_unicode_ci;
 
 подтянуть репозиторий - git clone https://github.com/gitpirojoke/audit-register.git;
 
