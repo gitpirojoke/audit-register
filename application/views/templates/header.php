@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 	<head>
 		<title>Audit Register</title>
 
@@ -49,4 +49,4 @@
   </nav>
 </div>
 	<body>
-        <div class="container">
+        <div class="container min-vh-100">

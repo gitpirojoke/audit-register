@@ -59,6 +59,7 @@ $route['audit/page/(:num)'] = 'audit/index/$1';
 $route['audit/create'] = 'audit/create';
 $route['audit/edit'] = 'audit/edit';
 $route['migrate/index'] = 'migrate/index';
+$route['seed/index'] = 'seed/index';
 $route['default_controller'] = 'audit';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
