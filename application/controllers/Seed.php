@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once FCPATH.'vendor/autoload.php';
 
 /**
+ * Класс первоначаьной подготовки таблиц
+ * возмжно не самое элегантное, но рабочее решение
+ *
  * @property Seed_model $seed_model
  */
 class Seed extends CI_Controller {
@@ -15,6 +18,9 @@ class Seed extends CI_Controller {
         $this->load->helper('url');
     }
 
+    /**
+     * Производит первоначальную поготовку таблиц
+     */
     public function index()
     {
         $supervisor_names = array(

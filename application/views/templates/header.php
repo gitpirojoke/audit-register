@@ -41,7 +41,7 @@
           </li>
 
           <li id="info_nav" class="nav-item">
-            <a class="nav-link" href="#">Справка</a>
+            <a class="nav-link" href="<?php echo base_url('audit/reference');?>">Справка</a>
           </li>
         </ul>
       </div>

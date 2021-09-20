@@ -32,7 +32,7 @@ class Audit extends CI_Controller {
 //        $data['audit'] = $this->audit_model->getAudit();
         $pageConfig['total_rows'] = $this->audit_model->countAudits();
         $pageConfig['base_url'] = base_url('audit/page');
-        $pageConfig['per_page'] = 5;
+        $pageConfig['per_page'] = 10;
         $pageConfig['use_page_numbers'] = TRUE;
         $pageConfig['first_url'] = base_url('audit/page/1');
         $offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1) * $pageConfig['per_page']:0;
@@ -66,7 +66,7 @@ class Audit extends CI_Controller {
         $data['title'] = 'Списк по фильтрам';
         $pageConfig['total_rows'] = $this->audit_model->countFilteredAudits($searchData);
         $pageConfig['base_url'] = base_url('audit/filter/page');
-        $pageConfig['per_page'] = 3;
+        $pageConfig['per_page'] = 10;
         $pageConfig['use_page_numbers'] = TRUE;
         $pageConfig['first_url'] = base_url('audit/filter/page/1');
         $offset = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) * $pageConfig['per_page']:0;
@@ -227,6 +227,18 @@ class Audit extends CI_Controller {
         }
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
+    }
+
+    /**
+     * Вывод справки
+     */
+    public function reference()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('audit/reference');
+        $this->load->view('templates/footer');
+
+
     }
 
     /**
