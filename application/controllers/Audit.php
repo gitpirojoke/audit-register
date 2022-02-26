@@ -80,6 +80,7 @@ class Audit extends CI_Controller {
         $this->load->view('templates/footer');
         $dod = 'kj';//ff
         $mester = 'goo';
+        $test3 ='dfdff';
 
     }
 
