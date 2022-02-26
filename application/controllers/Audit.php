@@ -83,6 +83,7 @@ class Audit extends CI_Controller {
         $test3 ='dfdff';
 
         $cvb ='jj';
+        $df ='88';
     }
 
     /**
