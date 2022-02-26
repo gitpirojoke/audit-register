@@ -80,6 +80,7 @@ class Audit extends CI_Controller {
         $dod = 'kj';//ff
         $mester = 'goo';
 
+        $cvb ='jj';
     }
 
     /**
