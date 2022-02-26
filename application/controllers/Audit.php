@@ -78,6 +78,7 @@ class Audit extends CI_Controller {
         $this->load->view('audit/index', $data);
         $this->load->view('templates/footer');
         $dod = 'kj';//ff
+        $mester = 'goo';
 
     }
 
