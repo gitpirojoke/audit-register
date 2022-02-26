@@ -73,12 +73,14 @@ class Audit extends CI_Controller {
         $data['audit'] = $this->audit_model->getFilteredPages($pageConfig['per_page'],$offset,$searchData);
         $this->pagination->initialize($pageConfig);
         $data['links'] = $this->pagination->create_links();
+        $test = 'f';
         $this->load->helper('form');
         $this->load->view('templates/header', $data);
         $this->load->view('audit/index', $data);
         $this->load->view('templates/footer');
         $dod = 'kj';//ff
         $mester = 'goo';
+        $test3 ='dfdff';
 
         $cvb ='jj';
     }
